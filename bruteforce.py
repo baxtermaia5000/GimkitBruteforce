@@ -1,7 +1,12 @@
 import requests as rq
 import random as rand
-mode = input("Loud mode?\n>>> ")
-#define stuff for request (cURL converter .com)
+from bs4 import BeautifulSoup as bs
+import json
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from time import sleep
+mode = input("Loud mode? y/n\n>>> ")
+usef=input("Write to file? y/n\n>>> ")
 cookies = {
     '__stripe_mid': '32dcd2aa-4803-48c6-8fb4-110d7c415f1ddf56a4',
     '__stripe_sid': 'c40e1442-e78a-40b3-9b38-c4b7706b489b62cc96',
@@ -21,40 +26,40 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
 }
-#open file and prep loop
-file=open("hits.txt", "w")
+if usef=="y":
+    file=open("hits.txt","w")
 code=79536
 checked=[]
-
-#MAIN LOOP
-
 while True:
-    #redefine code var for requests
     json_data = {
         'code': str(code),
     }
-    #add code to list for duplicate rerolling
     checked.append(code)
-    #print more shit if in loud mode
     if mode=="y":
         print(f'Searching {code}...')
-    #send post data
     response = rq.post(
         'https://www.gimkit.com/api/matchmaker/find-info-from-code',
         cookies=cookies,
         headers=headers,
         json=json_data,
     )
-    #ignore if invalid, print and append to file if valid code
+    
     if str(response)=="<Response [500]>":
         #print(str(response) + str(code))
         pass
     else:
-        print(f'Success at {code}!')
-        file.write(f'{code}\n')
-    #reroll code using randint()
-    code=rand.randint(0,999999)
-    #Make sure new code isn't a duplicate
+        soup=bs(response.text,"html.parser")
+        parsed=json.loads(soup.text)
+        #browser=webdriver.Chrome()
+        #browser.get("https://gimkit.com/join")
+        #sleep(3)
+        #codebox=browser.find_elements_by_class("sc-dMVFSy ksvqsy")
+        #print(codebox)
+        if usef=="y":
+            file.write(f'{code}\n')
+        print(f'Success at {code} with random names {parsed["useRandomNamePicker"]}')
+    code = rand.randint(0,999999)
     while code in checked:
         code=rand.randint(0,999999)
         print("rerolled dupe")
+
