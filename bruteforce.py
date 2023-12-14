@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 mode = input("Loud mode? y/n\n>>> ")
 usef=input("Write to file? y/n\n>>> ")
+print("Press ctrl + c to stop program")
 cookies = {
     '__stripe_mid': '32dcd2aa-4803-48c6-8fb4-110d7c415f1ddf56a4',
     '__stripe_sid': 'c40e1442-e78a-40b3-9b38-c4b7706b489b62cc96',
