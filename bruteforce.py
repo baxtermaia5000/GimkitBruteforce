@@ -34,12 +34,12 @@ try:
             'Sec-Fetch-Site': 'same-origin',
         }
         cookies = {
-            '__stripe_mid': '69b3b857-0d9f-425d-a3b8-304a04be2dc12d8758',
-        '_ga': 'GA1.1.1204632036.1702560656',
-        '_ga_32KJCRTBF3': 'GS1.1.1702560656.1.1.1702561698.0.0.0',
-        'connect.sid': 's%3AgzrofURXoCOWJRjH7lJjXzED3gHCDcPb.QTRedBHU%2BxrQKYaD8Dk%2Bx8QE2A%2BktYnIDH4iHCGuUUU',
-        '__stripe_sid': '202d92f3-ea39-43bf-9865-956f827df7cc875273',
-    }
+          '__stripe_mid': '69b3b857-0d9f-425d-a3b8-304a04be2dc12d8758',
+          '_ga': 'GA1.1.1204632036.1702560656',
+          '_ga_32KJCRTBF3': 'GS1.1.1702560656.1.1.1702561698.0.0.0',
+          'connect.sid': 's%3AgzrofURXoCOWJRjH7lJjXzED3gHCDcPb.QTRedBHU%2BxrQKYaD8Dk%2Bx8QE2A%2BktYnIDH4iHCGuUUU',
+          '__stripe_sid': '202d92f3-ea39-43bf-9865-956f827df7cc875273',
+        }
         json_data = {
             'code': str(code),
         }
@@ -62,15 +62,6 @@ try:
         else:
             soup=bs(response.text,"html.parser")
             parsed=json.loads(soup.text)
-            json_data1= {
-                    'roomId' : parsed["roomId"],
-                    'name' : "test",
-                    'clientType': 'Gimkit \u2061\u200d\u200c\u2064\u2061\u200d\u2062\u200c\u2062\u200c\u200d\u2062\u200c\u200d\u2062\u200c\u2061\u2062\u2061\u200c\u200d\u2061\u200d\u200d\u2064\u2062\u200d\u2064\u2061\u200d\u2063\u2062\u2061\u2061\u200d\u2061\u200d\u200c\u2061\u2062\u2063\u2061\u200d\u200d\u200c\u2061\u200c\u2061\u2062\u200c\u2061\u2063\u200c\u2061\u2062\u2063\u2061\u2061\u200c\u2061\u2064\u2062\u200c\u200d\u2061\u2061\u2061\u200d\u200c\u2062\u2061\u200d\u2061\u2064\u2063\u200d\u2061\u200c\u2062\u200d\u2062\u200d\u200d\u200d\u2063\u200d\u2061\u200d\u2064\u200d\u2061\u2061\u2064\u200c\u2062\u2061\u2062\u200d\u200d\u2064\u200c\u2062\u2063\u200d\u2061\u200d\u2061\u200c\u2062\u2061\u2062\u2061\u200d\u200d\u2062\u200c\u2061\u200d\u200c\u2061\u2061\u2061\u2061\u2061\u2061\u2062\u200c\u2061\u2061\u2063\u200c\u2062\u200d\u2063\u2062\u200d\u2064\u2063\u2064\u2062\u200c\u2062\u200d\u200c\u200d\u2061\u200d\u2062\u200d\u2062\u200d\u200c\u2061\u200c\u200d\u2061\u2061\u200d\u2064\u2061\u200c\u2062\u200d\u200d\u2061\u2062\u200d\u200d\u2061\u2063\u2063\u2063\u2064\u200c\u2062\u200d\u200c\u200d\u2061\u2062\u200c\u2061\u2062\u2061\u2062\u200d\u200c\u2061\u2064\u2061\u200d\u200c\u2062\u200c\u2061\u2061\u2061\u200d\u2061\u200d\u2061\u2061\u200c\u2061\u2063\u2061\u200d\u200c\u2061\u2061\u2062\u200d\u200d\u200d\u200d\u2062\u2061\u200c\u200d\u2061\u200c\u200d\u2062\u2061\u200c\u2061\u200c\u2061\u200d\u200d\u2062\u200c\u2062\u2063\u2062\u2061\u2064\u2062\u200c\u2064\u200c\u2061\u2062\u200d\u200d\u2062\u200c\u2061\u200c\u2061\u200d\u200d\u2061\u2061\u2061\u2062\u200d\u200d\u200c\u2062\u2063\u2062\u200c\u200d\u200c\u200d\u2064\u200c\u2062\u200c\u200d\u2063\u200c\u200d\u2062\u200c\u2062\u2061\u200d\u2061\u2062\u200c\u200d\u200d\u2062\u2063\u2061\u200c\u200d\u2061\u2062\u200dWeb Client V3.1'
-            }
-            response1 = rq.post('https://www.gimkit.com/api/matchmaker/join', cookies=cookies, headers=headers, json=json_data1)
-            soup1=bs(response1.text,'html.parser')
-            parsed1=json.loads(soup1.text)
-            print(parsed1)
             #browser=webdriver.Chrome()
             #browser.get("https://gimkit.com/join")
             #sleep(3)
@@ -78,8 +69,7 @@ try:
             #print(codebox)
             if usef=="y":
                 file.write(f'{code}\n')
-            print(response1.text)
-            print(f'Success at {code}, random names {parsed["useRandomNamePicker"]}, game type {"quiz" if parsed1["source"]=="original" else "not a quiz"}')
+            print(f'Success at {code}, random names {parsed["useRandomNamePicker"]}')
         code = rand.randint(1000,999999)
         #else:
             #code += 1
